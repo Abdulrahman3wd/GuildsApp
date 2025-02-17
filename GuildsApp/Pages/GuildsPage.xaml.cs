@@ -11,7 +11,6 @@ public partial class GuildsPage : ContentPage
 		InitializeComponent();
         BindingContext = new GuildsViewModel(new GuildServices(new HttpClient()));
 
-
     }
 
     protected override async void OnAppearing()
@@ -24,10 +23,15 @@ public partial class GuildsPage : ContentPage
         }
     }
 
-    //private void OnGridTapped(object sender, EventArgs e)
-    //{
-    //    ExpandableContent.IsVisible = !ExpandableContent.IsVisible;
-    //    ArrowIcon.Source = ExpandableContent.IsVisible ? "arrowup.png" : "arrowdown.png";
+    private async void GoToCreateGuild(object sender , EventArgs e)
+    {
+        var createGuildPage = Handler.MauiContext.Services.GetService<CreateGuildPage>();
+        await Navigation.PushAsync(createGuildPage);
+    }
+    private async void OnGoToListTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ListOfGuildsPage());
+    }
 
-    //}
+
 }

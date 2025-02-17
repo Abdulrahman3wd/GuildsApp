@@ -1,0 +1,114 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GuildsApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="GuildsApp.Pages.ListOfGuildsPage">
+    <ContentPage.BindingContext>
+        <vm:ListOfGuildsViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#fff" Offset="0.1"/>
+            <GradientStop Color="#e9f2f6" Offset="0.9"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout VerticalOptions="FillAndExpand">
+        <Grid Padding="10,15,10,0" ColumnDefinitions="Auto , *">
+            <Image Source="leftarrow.png"
+                   HeightRequest="20"
+                   WidthRequest="20"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Grid.Column="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackButtonTapped"/>
+                </Image.GestureRecognizers>
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource Secondary}"/>
+                </Image.Behaviors>
+            </Image>
+
+            <Label Text="List Of Guilds"
+                   FontSize="24"
+                   TextColor="{StaticResource Secondary}"
+                   FontFamily="FredokaSemiBold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Grid.Column="1"/>
+        </Grid>
+     
+        <VerticalStackLayout Padding="20,10,20,10">
+            <ScrollView>
+                <CollectionView ItemsSource="{Binding UserGuilds}" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,10" StrokeThickness="0" BackgroundColor="White" StrokeShape="RoundRectangle 20">
+                                <VerticalStackLayout>
+                                    <Grid Padding="20" ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding Name}"
+                                               FontSize="16"
+                                               FontFamily="FredokaMedium"
+                                               TextColor="{StaticResource Secondary}"/>
+                                        <HorizontalStackLayout Grid.Column="1">
+                                            <Label Text="View More" TextColor="{StaticResource Primary}" Margin="0,0,5,0"/>
+                                            <Image Source="rightarrow.png" WidthRequest="10">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                                                </Image.Behaviors>
+                                            </Image>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+
+                                    <HorizontalStackLayout Padding="10,0,10,0" Spacing="5">
+                                        <Border BackgroundColor="#cecccc" HeightRequest="80" WidthRequest="80"
+                                                Opacity="0.5" StrokeShape="RoundRectangle 20">
+                                            <Image Source="group.png" WidthRequest="50">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="#e5f0f5"/>
+                                                </Image.Behaviors>
+                                            </Image>
+                                        </Border>
+
+                                        <VerticalStackLayout Margin="0,5,0,0">
+                                            <Label Text="{Binding Members, StringFormat='● Members: {0}'}"
+                                                   TextColor="{StaticResource Primary}"
+                                                   FontSize="12"
+                                                   FontFamily="FredokaMedium"/>
+                                            <Label Text="{Binding Rank, StringFormat='● Rank: {0}'}"
+                                                   TextColor="{StaticResource Primary}"
+                                                   FontSize="12"
+                                                   FontFamily="FredokaMedium"/>
+                                            <Label Text="{Binding Location, StringFormat='● Location: {0}'}"
+                                                   TextColor="{StaticResource Primary}"
+                                                   FontSize="12"
+                                                   FontFamily="FredokaMedium"/>
+                                            <Label Text="{Binding Equipment, StringFormat='● Equipment: {0}'}"
+                                                   WidthRequest="200"
+                                                   TextColor="{StaticResource Primary}"
+                                                   FontSize="12"
+                                                   FontFamily="FredokaMedium"/>
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
+
+                                    <Label Text="{Binding Description}"
+                                                    WidthRequest="230" Margin="10,0,0,0"
+                                                    TextColor="{StaticResource Primary}"
+                                                    FontSize="12"
+                                                    FontFamily="FredokaMedium"
+                                                    Padding="10"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </ScrollView>
+
+        </VerticalStackLayout>
+
+
+    </VerticalStackLayout>
+</ContentPage>

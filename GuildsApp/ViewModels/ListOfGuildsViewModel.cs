@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using GuildsApp.Models;
 using GuildsApp.Services;
 using System;
@@ -10,30 +9,28 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GuildsApp.ViewModels
 {
-    public class GuildsViewModel : INotifyPropertyChanged
+    public class ListOfGuildsViewModel : INotifyPropertyChanged
     {
         private readonly GuildServices _guildServices;
 
+        public ListOfGuildsViewModel()
+        {
+            
+        }
 
-
-        public GuildsViewModel(GuildServices guildServices)
+        public ListOfGuildsViewModel(GuildServices guildServices)
         {
             _guildServices = guildServices;
             LoadDataCommand = new RelayCommand(async () => await LoadData());
 
-            Task.Run(async () => await LoadData()); // تحميل البيانات تلقائيًا
+            Task.Run(async () => await LoadData());
 
         }
-        public GuildsViewModel()
-        {
-        }
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         private ObservableCollection<Guild> _userGuilds = new ObservableCollection<Guild>();
         public ObservableCollection<Guild> UserGuilds
@@ -46,31 +43,21 @@ namespace GuildsApp.ViewModels
             }
         }
 
-        private ObservableCollection<Guild> _recommendedGuilds = new ObservableCollection<Guild>();
-        public ObservableCollection<Guild> RecommendedGuilds
-        {
-            get => _recommendedGuilds;
-            set
-            {
-                _recommendedGuilds = value;
-                OnPropertyChanged();
-            }
-        }
+
+
 
         public ICommand LoadDataCommand { get; }
 
         public async Task LoadData()
         {
-            var apiUrl = "https://ezl-test.vercel.app/userGuilds";
-            var userGuilds = await _guildServices.GetUserGuild(apiUrl);
-            var recommendedGuilds = await _guildServices.GetRecommendedGuild(apiUrl);
+            var apiUrl = "https://ezl-test.vercel.app/allGuilds";
+            var userGuilds = await _guildServices.GetAllGuildsAsync(apiUrl);
 
             UserGuilds = new ObservableCollection<Guild>(userGuilds);
-            RecommendedGuilds = new ObservableCollection<Guild>(recommendedGuilds);
 
             Debug.WriteLine($"User Guilds Count: {UserGuilds.Count}");
-            Debug.WriteLine($"Recommended Guilds Count: {RecommendedGuilds.Count}");
         }
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

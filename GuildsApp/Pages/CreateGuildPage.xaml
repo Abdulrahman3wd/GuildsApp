@@ -1,0 +1,129 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:GuildsApp.Converters"
+             x:Class="GuildsApp.Pages.CreateGuildPage"
+             xmlns:vm="clr-namespace:GuildsApp.ViewModels"
+             Title="CreateGuildPage">
+
+
+    <VerticalStackLayout>
+        <Grid Padding="10,15,10,0" ColumnDefinitions="Auto , *">
+            <Image Source="leftarrow.png"
+                   HeightRequest="20"
+                   WidthRequest="20"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Grid.Column="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackButtonTapped"/>
+                </Image.GestureRecognizers>
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource Secondary}"/>
+                </Image.Behaviors>
+            </Image>
+
+            <Label Text="Create Guild"
+                   FontSize="24"
+                   TextColor="{StaticResource Secondary}"
+                   FontFamily="FredokaSemiBold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Grid.Column="1"/>
+        </Grid>
+
+        <Border Margin="20" BackgroundColor="Transparent" StrokeThickness="0.6"
+                Stroke="{StaticResource Secondary}"
+                Padding="15,10,15,10"
+                StrokeShape="RoundRectangle 10">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+
+                <Border Grid.Row="0" HeightRequest="100" WidthRequest="100"
+                        Stroke="{StaticResource Secondary}"
+                        Padding="20"
+                        StrokeShape="RoundRectangle 10">
+                    <Image Source="group.png" Opacity="0.5">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource Secondary}"/>
+                        </Image.Behaviors>
+                    </Image>
+                </Border>
+
+                <VerticalStackLayout Grid.Row="1" Spacing="5">
+                    <Label Text="Guild Name" TextColor="{StaticResource Secondary}"/>
+                    <Border  BackgroundColor="Transparent" StrokeThickness="0.6"
+                            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 20">
+                        <Entry Text="{Binding CurrentGuild.Name}" TextColor="{StaticResource Secondary}" Margin="10,0,0,0"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="2" Spacing="5">
+                    <Label Text="Location" TextColor="{StaticResource Secondary}"/>
+                    <Border BackgroundColor="Transparent" StrokeThickness="0.6"
+                            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 20">
+                        <Entry Text="{Binding CurrentGuild.Location}" TextColor="{StaticResource Secondary}" Margin="10,0,0,0"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="3" Spacing="10">
+                    <Label Text="Equipment" TextColor="{StaticResource Secondary}"/>
+
+                    <CollectionView ItemsSource="{Binding Equipments1}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeThickness="0.5" BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedColorConverter}}" StrokeShape="RoundRectangle 20" Padding="10">
+                                    <Label Text="{Binding}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="14">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateGuildViewModel}}, Path=SelectEquipmentCommand}" CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <CollectionView ItemsSource="{Binding Equipments2}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeThickness="0.5" BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedColorConverter}}" StrokeShape="RoundRectangle 20" Padding="10">
+                                    <Label Text="{Binding}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="14">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateGuildViewModel}}, Path=SelectEquipmentCommand}" CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="4" Spacing="10">
+                    <Label Text="Details" TextColor="{StaticResource Secondary}"/>
+                    <Border  BackgroundColor="Transparent" StrokeThickness="0.6" Padding="0,0,0,15"
+                             Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 20">
+                        <Entry Text="{Binding CurrentGuild.Description}" TextColor="{StaticResource Secondary}" Margin="10,0,0,0" VerticalOptions="Start"/>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="5">
+                    <FlexLayout Grid.Row="5" JustifyContent="SpaceBetween">
+                        <Label VerticalOptions="Center" Text="Make Guild Private" TextColor="{StaticResource Secondary}"/>
+                        <CheckBox VerticalOptions="Center"
+                  Color="{StaticResource Secondary}"
+                  IsChecked="{Binding IsCheckBoxChecked}"/>
+                    </FlexLayout>
+                    <Border BackgroundColor="Transparent" StrokeThickness="0.6" IsVisible="{Binding IsCheckBoxChecked}"
+            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 20">
+                        <Entry Placeholder="Write password" Text="{Binding Password}" TextColor="{StaticResource Secondary}" Margin="10,0,0,0"/>
+                    </Border>
+                </VerticalStackLayout>
+                <Button Grid.Row="6" CornerRadius="20" BackgroundColor="{StaticResource Secondary}" Text="Create Guild" Command="{Binding CreateGuildCommand}"/>
+            </Grid>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

@@ -33,7 +33,7 @@
             Padding="10" 
             VerticalOptions="Center">
             <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding LoadDataCommand}" />
+                <TapGestureRecognizer  Tapped="GoToCreateGuild"/>
             </Border.GestureRecognizers>
 
             <Grid Padding="20,0,20,0" ColumnDefinitions="*, Auto">
@@ -140,16 +140,18 @@
                    FontSize="17"
                    FontFamily="FredokaSemiBold"/>
                 <HorizontalStackLayout Grid.Column="1">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGoToListTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+
                     <Label Text="Go To List"
-                               TextColor="{StaticResource Primary}"
-                               Margin="0,0,5,0"/>
-                    <Image Source="rightarrow.png" WidthRequest="10" >
+                           TextColor="{StaticResource Primary}"
+                           Margin="0,0,5,0"/>
+                    <Image Source="rightarrow.png" WidthRequest="10">
                         <Image.Behaviors>
                             <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
                         </Image.Behaviors>
-
                     </Image>
-
                 </HorizontalStackLayout>
             </Grid>
             <VerticalStackLayout>
@@ -191,12 +193,12 @@
 
                                             <HorizontalStackLayout Padding="0,0,10,0" Spacing="5">
                                                 <Border BackgroundColor="#cecccc"
-                                    HeightRequest="80"
-                                    WidthRequest="80"
-                                    Opacity="0.2"
-                                    StrokeShape="RoundRectangle 20">
+                                                        HeightRequest="80"
+                                                        WidthRequest="80"
+                                                        Opacity="0.2"
+                                                        StrokeShape="RoundRectangle 20">
                                                     <Image Source="group.png"
-                                       WidthRequest="50">
+                                                            WidthRequest="50">
                                                         <Image.Behaviors>
                                                             <toolkit:IconTintColorBehavior TintColor="#e5f0f5"/>
                                                         </Image.Behaviors>
@@ -205,40 +207,40 @@
 
                                                 <VerticalStackLayout Margin="0,5,0,0">
                                                     <Label Text="{Binding Members}"
-                                       TextColor="{StaticResource Primary}"
-                                       FontSize="12"
-                                       FontFamily="FredokaMedium"/>
+                                                            TextColor="{StaticResource Primary}"
+                                                            FontSize="12"
+                                                            FontFamily="FredokaMedium"/>
                                                     <Label Text="{Binding Rank}"
-                                       TextColor="{StaticResource Primary}"
-                                       FontSize="12"
-                                       FontFamily="FredokaMedium"/>
+                                                            TextColor="{StaticResource Primary}"
+                                                            FontSize="12"
+                                                            FontFamily="FredokaMedium"/>
                                                     <Label Text="{Binding Location}"
-                                       TextColor="{StaticResource Primary}"
-                                       FontSize="12"
-                                       FontFamily="FredokaMedium"/>
+                                                        TextColor="{StaticResource Primary}"
+                                                        FontSize="12"
+                                                        FontFamily="FredokaMedium"/>
                                                     <Label Text="{Binding Equipment}"
-                                       WidthRequest="200"
-                                       TextColor="{StaticResource Primary}"
-                                       FontSize="12"
-                                       FontFamily="FredokaMedium"/>
+                                                           WidthRequest="200"
+                                                           TextColor="{StaticResource Primary}"
+                                                           FontSize="12"
+                                                           FontFamily="FredokaMedium"/>
                                                 </VerticalStackLayout>
                                             </HorizontalStackLayout>
 
                                             <HorizontalStackLayout Padding="10,0,10,0" Spacing="5">
                                                 <Border BackgroundColor="Transparent"
-                                    HeightRequest="80"
-                                    WidthRequest="80"
-                                    Opacity="0.2"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 20">
+                                                        HeightRequest="80"
+                                                        WidthRequest="80"
+                                                        Opacity="0.2"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 20">
                                                 </Border>
 
                                                 <VerticalStackLayout Margin="0,5,0,0">
                                                     <Label Text="{Binding Description}"
-                                        WidthRequest="230"
-                                        TextColor="{StaticResource Primary}"
-                                        FontSize="12"
-                                        FontFamily="FredokaMedium"/>
+                                                            WidthRequest="230"
+                                                            TextColor="{StaticResource Primary}"
+                                                            FontSize="12"
+                                                            FontFamily="FredokaMedium"/>
                                                 </VerticalStackLayout>
                                             </HorizontalStackLayout>
                                         </VerticalStackLayout>
@@ -252,6 +254,7 @@
 
                 </Border>
             </VerticalStackLayout>
+            
             
 
 
