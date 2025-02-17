@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<shape xmlns:android="http://schemas.microsoft.com/apk/res/android">
+	<solid android:color="@android:color/transparent" />
+	<!-- خلفية شفافة -->
+	<corners android:topLeftRadius="30dp" android:topRightRadius="30dp" />
+	<!-- زوايا مقصوصة -->
+</shape>

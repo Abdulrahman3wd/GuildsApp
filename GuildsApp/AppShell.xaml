@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GuildsApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:pages="clr-namespace:GuildsApp.Pages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GuildsApp"
+    Shell.FlyoutBehavior="Disabled"
+    Title="GuildsApp">
+
+
+    <TabBar>
+        <Tab  Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainPage}"/>
+        </Tab>
+        <Tab  Icon="calculator.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainPage}"/>
+        </Tab>
+        <Tab  Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainPage}"/>
+        </Tab>
+        <Tab  Icon="trophy.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainPage}"/>
+        </Tab>
+        <Tab Icon="group.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:GuildsPage}"/>
+        </Tab>
+    </TabBar>
+    
+
+</Shell>

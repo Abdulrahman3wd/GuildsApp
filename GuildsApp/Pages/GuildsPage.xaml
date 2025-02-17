@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:views="clr-namespace:GuildsApp.Views"
+             xmlns:viewModels="clr-namespace:GuildsApp.ViewModels"
+             x:Class="GuildsApp.Pages.GuildsPage">
+    <ContentPage.BindingContext>
+        <viewModels:GuildsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#fff" Offset="0.1"/>
+            <GradientStop Color="#e9f2f6" Offset="0.9"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="20">
+        <VerticalStackLayout Grid.Row="0" Margin="0,15,0,0">
+            <Label Text="Guilds"
+                    HorizontalOptions="Center"
+                    FontSize="30"
+                    TextColor="{StaticResource Secondary}"
+                    FontFamily="FredokaSemiBold"/>
+        </VerticalStackLayout>
+
+   
+        <Border BackgroundColor="Transparent" Grid.Row="1"
+            Stroke="Gray"
+            HeightRequest="50"
+            WidthRequest="300"            
+            StrokeShape="RoundRectangle 50"
+            StrokeThickness="1"
+            Padding="10" 
+            VerticalOptions="Center">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LoadDataCommand}" />
+            </Border.GestureRecognizers>
+
+            <Grid Padding="20,0,20,0" ColumnDefinitions="*, Auto">
+
+                <Label Text="Create Guild"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       FontFamily="FredokaBold"                      
+                       TextColor="{StaticResource Secondary}"
+                       Grid.Column="0"/>
+
+                <Image Source="plus.png"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       WidthRequest="20"
+                       HeightRequest="20"
+                       Grid.Column="1">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Secondary}"/>
+                    </Image.Behaviors>
+                </Image>
+            </Grid>
+
+
+        </Border>
+
+
+        <VerticalStackLayout Grid.Row="2" Padding="30,0,30,0">
+            <Label Text="Your Guilds"
+           TextColor="{StaticResource Secondary}"
+           FontSize="17"
+           FontFamily="FredokaSemiBold"/>
+
+            <CollectionView ItemsSource="{Binding UserGuilds}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeThickness="0" BackgroundColor="White" StrokeShape="RoundRectangle 20">
+                            <VerticalStackLayout>
+                                <Grid Padding="20" ColumnDefinitions="* , Auto">
+                                    <Label Text="{Binding Name}"
+                                   FontSize="16"
+                                   FontFamily="FredokaMedium"
+                                   TextColor="{StaticResource Secondary}"/>
+                                    <HorizontalStackLayout Grid.Column="1">
+                                        <Label Text="View More" TextColor="{StaticResource Primary}" Margin="0,0,5,0"/>
+                                        <Image Source="rightarrow.png" WidthRequest="10">
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                    </HorizontalStackLayout>
+                                </Grid>
+
+                                <HorizontalStackLayout Padding="10,0,10,0" Spacing="5">
+                                    <Border BackgroundColor="#cecccc" HeightRequest="80" WidthRequest="80"
+                                    Opacity="0.2" StrokeShape="RoundRectangle 20">
+                                        <Image Source="group.png" WidthRequest="50">
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="#e5f0f5"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                    </Border>
+
+                                    <VerticalStackLayout Margin="0,5,0,0">
+                                        <Label Text="{Binding Members, StringFormat='● Members: {0}'}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                        <Label Text="{Binding Rank, StringFormat='● Rank: {0}'}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                        <Label Text="{Binding Location, StringFormat='● Location: {0}'}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                        <Label Text="{Binding Equipment, StringFormat='● Equipment: {0}'}"
+                                       WidthRequest="200"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+
+                                <Label Text="{Binding Description}"
+                               WidthRequest="230"
+                               TextColor="{StaticResource Primary}"
+                               FontSize="12"
+                               FontFamily="FredokaMedium"
+                               Padding="10"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+
+        <VerticalStackLayout Padding="30,0,30,0" Grid.Row="3" Spacing="5">
+            <Grid ColumnDefinitions="* , Auto">
+                <Label Text="Recommended Guilds" Grid.Column="0"
+                   TextColor="{StaticResource Secondary}"
+                   FontSize="17"
+                   FontFamily="FredokaSemiBold"/>
+                <HorizontalStackLayout Grid.Column="1">
+                    <Label Text="Go To List"
+                               TextColor="{StaticResource Primary}"
+                               Margin="0,0,5,0"/>
+                    <Image Source="rightarrow.png" WidthRequest="10" >
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                        </Image.Behaviors>
+
+                    </Image>
+
+                </HorizontalStackLayout>
+            </Grid>
+            <VerticalStackLayout>
+                <Border BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                    <CollectionView ItemsSource="{Binding RecommendedGuilds}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeThickness="0" Padding="15,10,15,10"
+                                        BackgroundColor="White"
+                                        StrokeShape="RoundRectangle 20">
+
+                                    <VerticalStackLayout>
+                                        <Grid ColumnDefinitions="*, Auto"
+                                              BackgroundColor="Transparent"
+                                              Padding="10">
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ToggleVisibilityCommand}" />
+                                            </Grid.GestureRecognizers>
+
+                                            <Label Text="{Binding Name}"
+                                                   Grid.Column="0"
+                                                   TextColor="{StaticResource Secondary}"
+                                                   FontSize="14"
+                                                   FontFamily="FredokaSemiBold"/>
+
+                                            <Image Source="{Binding ArrowIcon}"
+                                                   Grid.Column="1"
+                                                   WidthRequest="12">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource Secondary}"/>
+                                                </Image.Behaviors>
+                                            </Image>
+                                        </Grid>
+
+
+                                        <VerticalStackLayout x:Name="ExpandableContent"
+                                            Margin="0,5,0,0"
+                                            IsVisible="{Binding IsExpanded}">
+
+                                            <HorizontalStackLayout Padding="0,0,10,0" Spacing="5">
+                                                <Border BackgroundColor="#cecccc"
+                                    HeightRequest="80"
+                                    WidthRequest="80"
+                                    Opacity="0.2"
+                                    StrokeShape="RoundRectangle 20">
+                                                    <Image Source="group.png"
+                                       WidthRequest="50">
+                                                        <Image.Behaviors>
+                                                            <toolkit:IconTintColorBehavior TintColor="#e5f0f5"/>
+                                                        </Image.Behaviors>
+                                                    </Image>
+                                                </Border>
+
+                                                <VerticalStackLayout Margin="0,5,0,0">
+                                                    <Label Text="{Binding Members}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                                    <Label Text="{Binding Rank}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                                    <Label Text="{Binding Location}"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                                    <Label Text="{Binding Equipment}"
+                                       WidthRequest="200"
+                                       TextColor="{StaticResource Primary}"
+                                       FontSize="12"
+                                       FontFamily="FredokaMedium"/>
+                                                </VerticalStackLayout>
+                                            </HorizontalStackLayout>
+
+                                            <HorizontalStackLayout Padding="10,0,10,0" Spacing="5">
+                                                <Border BackgroundColor="Transparent"
+                                    HeightRequest="80"
+                                    WidthRequest="80"
+                                    Opacity="0.2"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
+                                                </Border>
+
+                                                <VerticalStackLayout Margin="0,5,0,0">
+                                                    <Label Text="{Binding Description}"
+                                        WidthRequest="230"
+                                        TextColor="{StaticResource Primary}"
+                                        FontSize="12"
+                                        FontFamily="FredokaMedium"/>
+                                                </VerticalStackLayout>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+
+                                </Border>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </Border>
+            </VerticalStackLayout>
+            
+
+
+
+
+        </VerticalStackLayout>
+
+
+    </Grid>
+
+    
+</ContentPage>
